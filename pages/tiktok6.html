@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro TikTok Video Downloader</title>
+    <style>
+        /* --- General Styling & Professional Look --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #00aaff;
+            --text-color: #e0e0e0;
+            --text-secondary-color: #a0a0a0;
+            --border-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* --- CHANGE #1: BODY HAS NO PADDING --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            /* Padding removed to allow content to touch screen edges */
+        }
+
+        /* --- CHANGE #2: CONTAINER IS A FULL-WIDTH WRAPPER --- */
+        .container {
+            width: 100%;
+            background-color: var(--surface-color);
+            text-align: center;
+            /* Padding is now only on top and bottom, not left and right */
+            padding: 2rem 0; 
+            /* Border and radius removed for a seamless look */
+        }
+
+        /* --- CHANGE #3: TEXT ELEMENTS GET PADDING, IFRAME DOESN'T --- */
+        .header {
+            /* We add padding here to keep text from touching the edges */
+            padding: 0 1.5rem; 
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: -webkit-linear-gradient(45deg, var(--primary-color), #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-secondary-color);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* --- The Iframe Hiding Technique (Now full-width) --- */
+
+        .iframe-clipper {
+            width: 100%;
+            height: 180px; 
+            overflow: hidden; 
+            position: relative; 
+            background-color: #000;
+            /* Note: No border-radius, so it's a sharp rectangle edge-to-edge */
+            transition: height 0.5s ease-in-out;
+        }
+
+        #downloader-iframe {
+            width: 100%;
+            height: 550px; 
+            border: none;
+            margin-top: -105px;
+            transition: margin-top 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary-color);
+            /* We add padding here too for the same reason as the header */
+            padding: 0 1.5rem;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <header class="header">
+            <h1>TikTok Downloader</h1>
+            <p>Paste a TikTok video link below to download without watermark.</p>
+        </header>
+        
+        <!-- This clipper and iframe will now be full screen width -->
+        <div class="iframe-clipper" id="iframe-clipper">
+            <iframe 
+                id="downloader-iframe"
+                src="https://ssstik.io/in"
+                scrolling="no"
+                frameborder="0">
+            </iframe>
+        </div>
+
+        <footer class="footer">
+            <p>This tool provides a user interface for a third-party service. We are not affiliated with ssstik.io or TikTok.</p>
+        </footer>
+    </main>
+
+    <!-- The Javascript remains the same, as it works perfectly -->
+    <script>
+        const iframeClipper = document.getElementById('iframe-clipper');
+        const downloaderIframe = document.getElementById('downloader-iframe');
+
+        function expandIframeView() {
+            console.log("Timer finished. Changing styles now.");
+            iframeClipper.style.height = '270px';
+            downloaderIframe.style.height = '650px';
+            downloaderIframe.style.marginTop = '-395px';
+        }
+
+        iframeClipper.addEventListener('mouseover', () => {
+            console.log("Mouse has entered the iframe area. Starting 5-second timer.");
+            setTimeout(expandIframeView, 5000);
+        }, { once: true });
+
+    </script>
+
+</body>
+</html>
