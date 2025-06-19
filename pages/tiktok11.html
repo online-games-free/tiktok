@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro TikTok Video Downloader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- General Styling & Professional Look --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        :root {
+            --bg-color: #0f0b1d;
+            --surface-color: #1a162c;
+            --primary-color: #F700E3;
+            --text-color: #e0e0e0;
+            --text-secondary-color: #a0a0a0;
+            --border-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f0b1d 0%, #1c0d33 100%);
+        }
+        
+        /* ================================================= */
+        /* === MOBILE-FIRST STYLES (Default for all screens) === */
+        /* ================================================= */
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+            background-color: var(--surface-color);
+            text-align: center;
+            padding: 2rem 0; 
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            padding: 0 1.5rem; 
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: -webkit-linear-gradient(45deg, var(--primary-color), #ff00cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-secondary-color);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .iframe-clipper {
+            width: 100%;
+            overflow: hidden; 
+            position: relative; 
+            background-color: #000;
+            transition: height 0.5s ease-in-out;
+            /* MOBILE Initial State */
+            height: 180px; 
+        }
+
+        #downloader-iframe {
+            width: 100%;
+            border: none;
+            transition: margin-top 0.5s ease-in-out, height 0.5s ease-in-out;
+            /* MOBILE Initial State */
+            height: 550px; 
+            margin-top: -105px;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            background: rgba(247, 0, 227, 0.1);
+            border: 1px solid rgba(247, 0, 227, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .feature i {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .feature p {
+            font-size: 0.85rem;
+            color: var(--text-secondary-color);
+        }
+
+        /* SEO Content */
+        .seo-content {
+            padding: 0 1.5rem;
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .seo-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            text-align: center;
+            background: -webkit-linear-gradient(45deg, var(--primary-color), #00aaff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .seo-section {
+            margin-bottom: 2rem;
+        }
+
+        .seo-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .seo-section p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary-color);
+            line-height: 1.6;
+        }
+
+        .seo-section ul {
+            padding-left: 20px;
+            margin: 1rem 0;
+        }
+
+        .seo-section li {
+            margin-bottom: 10px;
+            color: var(--text-secondary-color);
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 2rem 0;
+        }
+
+        .benefit {
+            background: rgba(247, 0, 227, 0.05);
+            border: 1px solid rgba(247, 0, 227, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .benefit i {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .benefit h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .benefit p {
+            color: var(--text-secondary-color);
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary-color);
+            padding: 0 1.5rem;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* =================================================================== */
+        /* === DESKTOP / LAPTOP STYLES (Applies to screens 768px and wider) === */
+        /* =================================================================== */
+        @media (min-width: 768px) {
+            .container {
+                margin: 2rem;
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            }
+            
+            .header, .footer {
+                padding: 0;
+            }
+
+            .iframe-clipper {
+                border-radius: 8px;
+                height: 130px;
+            }
+
+            #downloader-iframe {
+                height: 300px; 
+                margin-top: -145px;
+            }
+
+            .features {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                padding: 0;
+            }
+
+            .seo-content {
+                padding: 0;
+            }
+
+            .benefits {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <header class="header">
+            <h1>TikTok Downloader</h1>
+            <p>Paste a TikTok video link below to download without watermark.</p>
+        </header>
+        
+        <div class="iframe-clipper" id="iframe-clipper">
+            <iframe 
+                id="downloader-iframe"
+                src="https://ssstik.io/in"
+                scrolling="no"
+                frameborder="0">
+            </iframe>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-water"></i>
+                <h3>No Watermark</h3>
+                <p>Download clean videos without any TikTok branding</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-hd"></i>
+                <h3>HD Quality</h3>
+                <p>Get videos in original high-definition quality</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-music"></i>
+                <h3>MP3 Audio</h3>
+                <p>Extract audio from any TikTok video</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h3>Fast Processing</h3>
+                <p>Download videos in seconds</p>
+            </div>
+        </div>
+
+        <!-- SEO Content Section -->
+        <div class="seo-content">
+            <h2>The Ultimate TikTok Video & Music Downloader</h2>
+            
+            <div class="seo-section">
+                <h3>Download TikTok Videos Without Watermark</h3>
+                <p>Our TikTok Downloader is the perfect solution for saving your favorite TikTok videos without any watermark. Whether you want to preserve memorable content, share videos with friends, or use clips for creative projects, our tool ensures you get clean, high-quality downloads every time.</p>
+                
+                <p>Unlike screen recording which captures watermarks and reduces quality, our downloader preserves the original HD resolution while completely removing TikTok branding. This makes your downloads perfect for reposting, editing, or personal archives.</p>
+            </div>
+            
+            <div class="benefits">
+                <div class="benefit">
+                    <i class="fas fa-save"></i>
+                    <h4>Preserve Memories</h4>
+                    <p>Save meaningful videos that you want to keep forever without platform restrictions.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-video"></i>
+                    <h4>Content Creation</h4>
+                    <p>Repurpose TikTok content for your own videos, presentations, or compilations.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-wifi"></i>
+                    <h4>Offline Viewing</h4>
+                    <p>Watch your favorite videos without internet access during travel or commutes.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-music"></i>
+                    <h4>Music Collection</h4>
+                    <p>Build a personal collection of trending TikTok sounds and audio tracks.</p>
+                </div>
+            </div>
+            
+            <div class="seo-section">
+                <h3>How to Download TikTok Videos in HD Quality</h3>
+                <p>Downloading TikTok videos without watermark is simple with our tool:</p>
+                <ul>
+                    <li><strong>Step 1:</strong> Find the TikTok video you want to download in the TikTok app</li>
+                    <li><strong>Step 2:</strong> Tap the "Share" icon and copy the video link</li>
+                    <li><strong>Step 3:</strong> Paste the link in the downloader above</li>
+                    <li><strong>Step 4:</strong> Select "Download without watermark"</li>
+                    <li><strong>Step 5:</strong> Save the HD video to your device</li>
+                </ul>
+                <p>The entire process takes less than 15 seconds and requires no technical knowledge. You'll get the best possible version of any TikTok video in pristine HD quality.</p>
+            </div>
+            
+            <div class="seo-section">
+                <h3>Download TikTok Music Separately</h3>
+                <p>Many users don't realize that our downloader can also extract just the audio from TikTok videos. This is perfect for:</p>
+                <ul>
+                    <li>Creating ringtones from trending sounds</li>
+                    <li>Sampling music for your own content</li>
+                    <li>Building a library of viral TikTok songs</li>
+                    <li>Listening to audio-only versions of podcasts</li>
+                </ul>
+                <p>Simply choose the "MP3" option when downloading to get the audio track in high-quality 320kbps format.</p>
+            </div>
+            
+            <div class="seo-section">
+                <h3>Why Choose Our TikTok Downloader?</h3>
+                <p>With countless TikTok downloaders available, here's why ours stands out:</p>
+                <ul>
+                    <li><strong>No Watermarks:</strong> Completely clean videos without any branding</li>
+                    <li><strong>HD Quality:</strong> Preserves original video resolution up to 1080p</li>
+                    <li><strong>Fast Processing:</strong> Download videos in seconds</li>
+                    <li><strong>No Registration:</strong> Use instantly without creating an account</li>
+                    <li><strong>Completely Free:</strong> No hidden fees or subscriptions</li>
+                    <li><strong>Mobile-Friendly:</strong> Works perfectly on all devices</li>
+                </ul>
+                <p>Whether you're downloading dance videos, comedy skits, or educational content, you'll get the best possible version with our tool.</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>This tool provides a user interface for a third-party service. We are not affiliated with ssstik.io or TikTok.</p>
+        </footer>
+    </main>
+
+    <!-- The Javascript is now responsive -->
+    <script>
+        const iframeClipper = document.getElementById('iframe-clipper');
+        const downloaderIframe = document.getElementById('downloader-iframe');
+
+        function expandIframeView() {
+            console.log("Timer finished. Checking screen size and changing styles.");
+
+            // This line checks if the screen is wider than 768px
+            const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+
+            if (isDesktop) {
+                // --- DESKTOP & LAPTOP EXPANDED VALUES ---
+                console.log("Applying DESKTOP styles.");
+                iframeClipper.style.height = '240px';
+                downloaderIframe.style.height = '600px';
+                downloaderIframe.style.marginTop = '-350px';
+
+            } else {
+                // --- MOBILE EXPANDED VALUES ---
+                console.log("Applying MOBILE styles.");
+                iframeClipper.style.height = '270px';
+                downloaderIframe.style.height = '670px';
+                downloaderIframe.style.marginTop = '-405px';
+            }
+        }
+
+        // The trigger event remains the same
+        iframeClipper.addEventListener('mouseover', () => {
+            console.log("Mouse has entered the iframe area. Starting 5-second timer.");
+            setTimeout(expandIframeView, 5000);
+        }, { once: true });
+    </script>
+</body>
+</html>
